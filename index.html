@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Rock, Paper, Scissors by Dawid Oleniacz</title>
+</head>
+<body>
+    <main>
+      <nav>
+        <h2>ROCK <br> PAPER <br> SCISSORS</h2>
+        <div class="pkt">
+          <p>SCORE</p>
+          <h1 id="wynik">0/0</h1>
+        </div>
+      </nav>
+      <div class="content">
+        <div class="g">
+          <div class="papier" onclick="gra('papier')">
+          <img src="images/icon-paper.svg" alt="">
+          </div>
+          <div class="nozyce" onclick="gra('nozyce')">
+          <img src="images/icon-scissors.svg" alt="">
+          </div>
+        </div>
+        <div class="d">
+          <div class="kamien" onclick="gra('kamien')">
+          <img src="images/icon-rock.svg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="rules">
+        <button class="przycisk" onclick="document.getElementById('zasady').style = 'display: flex; animation: fadein 0.5s;';">RULES</button>
+      </div>
+    </main>
+    <div class="zasady" id="zasady">
+      <img src="images/image-rules.svg" alt="">
+      <h1 id="wylacz" onclick="document.getElementById('zasady').style = 'display: none; animation: fadein 0.5s;';">X</h1>
+    </div>
+    <div id="gra">
+      <div class="you">
+        <h2>YOU PICKED</h2>
+        <div id="ty">
+          <img id="tywygrales" src="" alt="">
+        </div>
+      </div>
+      <div class="vs">
+        <h1 id="info"></h1>
+        <button id="jeszczeraz" onclick="document.getElementById('gra').style = 'display: none';">PLAY AGAIN</button>
+      </div>
+      <div class="komp">
+        <h2>THE HOUSE PICKED</h2>
+        <div id="przeciwnik">
+          <img id="kompwygral" src="" alt="">
+        </div>
+      </div>
+    </div>
+
+    <script>
+        let wynikg = 0;
+        let wynikk = 0;
+      function gra(wybrane){
+        let numer = Math.floor(Math.random()*(3-1+1)+1);
+        let komp = " ";
+        let wygral = " ";
+        let img = " ";
+        switch (numer){
+          case 1:
+            komp = "papier";
+            break;
+          case 2:
+            komp = "kamien";
+            break;
+          case 3:
+            komp = "nozyce"
+            break;
+          default:
+            alert('błąd losowania');
+        }
+        console.log(wybrane);
+        console.log(komp);
+        console.log('---------');
+        if (wybrane == komp){
+          wygral = "DRAW";
+        }
+        else if((wybrane == 'papier' && komp == 'kamien') || (wybrane == 'kamien' && komp == 'nozyce') || (wybrane == 'nozyce' && komp == 'papier') ){
+          wygral = "YOU WIN";
+          wynikg++;
+        }
+        else{
+          wygral = "YOU LOSE";
+          wynikk++;
+        }
+        document.getElementById("wynik").innerHTML = wynikg + "/" + wynikk;
+        document.getElementById('gra').style = "display: flex; animation: fadein 0.5s;";
+        document.getElementById("info").innerHTML = wygral;
+        if(wybrane == "papier"){
+          document.getElementById("tywygrales").src = "images/icon-paper.svg";
+          document.getElementById("tywygrales").className = "papier";
+        }
+        if(wybrane == "kamien"){
+          document.getElementById("tywygrales").src = "images/icon-rock.svg";
+          document.getElementById("tywygrales").className = "kamien";
+        }
+        if(wybrane == "nozyce"){
+          document.getElementById("tywygrales").src = "images/icon-scissors.svg";
+          document.getElementById("tywygrales").className = "nozyce";
+        }
+        if(komp == "papier"){
+          document.getElementById("kompwygral").src = "images/icon-paper.svg";
+          document.getElementById("kompwygral").className = "papier";
+        }
+        if(komp == "kamien"){
+          document.getElementById("kompwygral").src = "images/icon-rock.svg";
+          document.getElementById("kompwygral").className = "kamien";
+        }
+        if(komp == "nozyce"){
+          document.getElementById("kompwygral").src = "images/icon-scissors.svg";
+          document.getElementById("kompwygral").className = "nozyce";
+        }
+      }
+    </script>
+</body>
+</html>
